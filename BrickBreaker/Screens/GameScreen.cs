@@ -45,6 +45,7 @@ namespace BrickBreaker
             OnStart();
         }
 
+        
 
         public void OnStart()
         {
@@ -58,13 +59,13 @@ namespace BrickBreaker
             int paddleWidth = 80;
             int paddleHeight = 20;
             int paddleX = ((this.Width / 2) - (paddleWidth / 2));
-            int paddleY = (this.Height - paddleHeight) - 60;
+            int paddleY = (this.Height - paddleHeight) - 20;
             int paddleSpeed = 8;
             paddle = new Paddle(paddleX, paddleY, paddleWidth, paddleHeight, paddleSpeed, Color.White);
 
             // setup starting ball values
             int ballX = this.Width / 2 - 10;
-            int ballY = this.Height - paddle.height - 80;
+            int ballY = this.Height - paddle.height - 40;
 
             // Creates a new ball
             int xSpeed = 6;
@@ -208,6 +209,10 @@ namespace BrickBreaker
 
             // Draws ball
             e.Graphics.FillRectangle(ballBrush, ball.x, ball.y, ball.size, ball.size);
+
+            //Draws hearts
+            Rectangle heartBox = new Rectangle(0, 0, 50, 50);
+            e.Graphics.DrawImageUnscaledAndClipped(Properties.Resources.heartIcon, heartBox);
         }
     }
 }
