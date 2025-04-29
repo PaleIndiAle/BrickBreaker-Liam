@@ -212,7 +212,7 @@ namespace BrickBreaker
 
             //Draws hearts
             Rectangle heartBox = new Rectangle(0, 0, 50, 50);
-            e.Graphics.DrawImageUnscaledAndClipped(Properties.Resources.heartIcon, heartBox);
+            //e.Graphics.DrawImageUnscaledAndClipped(Properties.Resources.heartIcon, heartBox);
         }
     }
 }
