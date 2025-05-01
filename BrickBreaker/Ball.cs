@@ -63,7 +63,7 @@ namespace BrickBreaker
                 {
                     xSpeed = 5;
 
-                    if (x < lastX) //if ball moving left
+                    if (x > lastX) //if ball moving left
                     {
                         xSpeed = -xSpeed;
                     }
@@ -78,7 +78,7 @@ namespace BrickBreaker
                 {
                     xSpeed = 5;
 
-                    if (x > lastX) //if ball moving right
+                    if (x < lastX) //if ball moving right
                     {
                         xSpeed = +xSpeed;
                     }
@@ -95,11 +95,12 @@ namespace BrickBreaker
 
                 if (y + size > p.y) //if ballY + ballsize is more than paddleY (bottom of ball is more than top of paddle) //hitting paddle sides
                 {
+                    //xSpeed *= -1;
+
                     if (x < p.x) //hit left side
                     {
                         x = p.x - size; //move ball to the left side
 
-                        xSpeed *= -1;
                     }
                     else if (x + size > p.x + p.width + 1) //hit right side
                     {
