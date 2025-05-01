@@ -35,9 +35,9 @@ namespace BrickBreaker
         public List<Block> blocks = new List<Block>();
 
         // Brushes
-        SolidBrush paddleBrush = new SolidBrush(Color.White);
-        SolidBrush ballBrush = new SolidBrush(Color.White);
-        SolidBrush blockBrush = new SolidBrush(Color.Red);
+        SolidBrush whiteBrush = new SolidBrush(Color.White);
+        SolidBrush blackBrush = new SolidBrush(Color.Black);
+        SolidBrush redBrush = new SolidBrush(Color.Red);
 
         #endregion
 
@@ -114,6 +114,9 @@ namespace BrickBreaker
                     break;
                 case Keys.Right:
                     rightArrowDown = true;
+                    break;
+                case Keys.Escape:
+                    this.FindForm().Close();
                     break;
                 default:
                     break;
@@ -239,23 +242,24 @@ namespace BrickBreaker
         public void GameScreen_Paint(object sender, PaintEventArgs e)
         {
             // Draws paddle
-            paddleBrush.Color = paddle.colour;
-            e.Graphics.FillRectangle(paddleBrush, paddle.x, paddle.y, paddle.width, paddle.height);
+            whiteBrush.Color = paddle.colour;
+            e.Graphics.FillRectangle(whiteBrush, paddle.x, paddle.y, paddle.width, paddle.height);
 
             // Draws blocks
             foreach (Block b in blocks)
             {
-                blockBrush = new SolidBrush(Color.Red);
-                e.Graphics.FillRectangle(blockBrush, b.x, b.y, b.width, b.height);
-                e.Graphics.FillEllipse(blockBrush, 60, 70, 100, 100);
+
+                e.Graphics.FillRectangle(redBrush, b.x, b.y, b.width, b.height);
             }
 
             // Draws ball
-            e.Graphics.FillRectangle(ballBrush, ball.x, ball.y, ball.size, ball.size);
+            e.Graphics.FillRectangle(whiteBrush, ball.x, ball.y, ball.size, ball.size);
 
             //Draws hearts
-            Rectangle heartBox = new Rectangle(0, 0, 50, 50);
-            //e.Graphics.DrawImageUnscaledAndClipped(Properties.Resources.heartIcon, heartBox);
+            Rectangle heartBox1 = new Rectangle(25, 25, 50, 50);
+            Rectangle heartBox2 = new Rectangle(25 + 50 + 25, 25, 50, 50);
+            e.Graphics.FillRectangle(whiteBrush, heartBox1);
+            e.Graphics.FillRectangle(whiteBrush, heartBox2);
         }
     }
 }
