@@ -145,6 +145,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="level1.xml" />
+    <Content Include="level2.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

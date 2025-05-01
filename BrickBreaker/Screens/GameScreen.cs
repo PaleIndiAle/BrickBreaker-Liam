@@ -12,6 +12,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Media;
+using System.Xml;
 
 namespace BrickBreaker
 {
@@ -24,13 +25,14 @@ namespace BrickBreaker
 
         // Game values
         int lives;
+        int level;
 
         // Paddle and Ball objects
         Paddle paddle;
         Ball ball;
 
         // list of all blocks for current level
-        List<Block> blocks = new List<Block>();
+        public List<Block> blocks = new List<Block>();
 
         // Brushes
         SolidBrush paddleBrush = new SolidBrush(Color.White);
@@ -74,18 +76,27 @@ namespace BrickBreaker
             ball = new Ball(ballX, ballY, xSpeed, ySpeed, ballSize);
 
             #region Creates blocks for generic level. Need to replace with code that loads levels.
-            
-            //TODO - replace all the code in this region eventually with code that loads levels from xml files
-            
-            blocks.Clear();
-            int x = 10;
 
-            while (blocks.Count < 12)
-            {
-                x += 57;
-                Block b1 = new Block(x, 10, 1, Color.White);
-                blocks.Add(b1);
-            }
+            //TODO - replace all the code in this region eventually with code that loads levels from xml files
+
+           // if (blocks == null)
+            //{
+                //ExtractLevel(1);
+               
+               // level++;
+           // }
+
+
+
+            //blocks.Clear();
+            //int x = 10;
+
+            //while (blocks.Count < 12)
+            //{
+            //    x += 57;
+            //    Block b1 = new Block(x, 10, 1, Color.White);
+            //    blocks.Add(b1);
+            //}
 
             #endregion
 
@@ -195,6 +206,36 @@ namespace BrickBreaker
             form.Controls.Remove(this);
         }
 
+        public void ExtractLevel(int level)
+        {
+            XmlReader reader = XmlReader.Create($"level{level}.xml");
+
+            while (reader.Read())
+            {
+                while (reader.Read())
+                {
+                    if (reader.NodeType == XmlNodeType.Text)
+                    {
+                        int x = Convert.ToInt16(reader.ReadString());
+
+                        reader.ReadToNextSibling("y");
+                        int y = Convert.ToInt16(reader.ReadString());
+
+                        reader.ReadToNextSibling("hp");
+                        int hp = Convert.ToInt16(reader.ReadString());
+
+                        reader.ReadToNextSibling("bType");
+                        string bType = reader.ReadString();
+
+                        Block b = new Block(x, y, hp, bType);
+                        blocks.Add(b);
+                    }
+                }
+                reader.Close();
+
+            }
+        }
+
         public void GameScreen_Paint(object sender, PaintEventArgs e)
         {
             // Draws paddle
@@ -204,7 +245,9 @@ namespace BrickBreaker
             // Draws blocks
             foreach (Block b in blocks)
             {
+                blockBrush = new SolidBrush(Color.Red);
                 e.Graphics.FillRectangle(blockBrush, b.x, b.y, b.width, b.height);
+                e.Graphics.FillEllipse(blockBrush, 60, 70, 100, 100);
             }
 
             // Draws ball
