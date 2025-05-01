@@ -1,22 +1,69 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <level>
-
 	<brick>
-		<x>100</x>
-		<y>100</y>
-		<hp>2</hp>
-		<colour>Goldenrod</colour>
+		<x>37</x>
+		<y>108</y>
+		<hp>1</hp>
+		<bType>Dirt</bType>
 	</brick>
 	<brick>
-		<x>350</x>
-		<y>100</y>
-		<hp>2</hp>
-		<colour>Goldenrod</colour>
+		<x>196</x>
+		<y>37</y>
+		<hp>1</hp>
+		<bType>Dirt</bType>
 	</brick>
 	<brick>
-		<x>30</x>
-		<y>100</y>
-		<hp>2</hp>
-		<colour>Goldenrod</colour>
+		<x>37</x>
+		<y>280</y>
+		<hp>1</hp>
+		<bType>Dirt</bType>
+	</brick>
+	<brick>
+		<x>231</x>
+		<y>187</y>
+		<hp>1</hp>
+		<bType>Dirt</bType>
+	</brick>
+	<brick>
+		<x>245</x>
+		<y>341</y>
+		<hp>1</hp>
+		<bType>Dirt</bType>
+	</brick>
+	<brick>
+		<x>381</x>
+		<y>136</y>
+		<hp>1</hp>
+		<bType>Dirt</bType>
+	</brick>
+	<brick>
+		<x>434</x>
+		<y>298</y>
+		<hp>1</hp>
+		<bType>Dirt</bType>
+	</brick>
+	<brick>
+		<x>518</x>
+		<y>26</y>
+		<hp>1</hp>
+		<bType>Dirt</bType>
+	</brick>
+	<brick>
+		<x>585</x>
+		<y>187</y>
+		<hp>1</hp>
+		<bType>Dirt</bType>
+	</brick>
+	<brick>
+		<x>712</x>
+		<y>86</y>
+		<hp>1</hp>
+		<bType>Dirt</bType>
+	</brick>
+	<brick>
+		<x>755</x>
+		<y>316</y>
+		<hp>1</hp>
+		<bType>Dirt</bType>
 	</brick>
 </level>
