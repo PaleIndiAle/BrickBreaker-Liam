@@ -24,9 +24,12 @@ namespace BrickBreaker
         Boolean leftArrowDown, rightArrowDown;
 
         // Game values
+        Random Randgen = new Random();
         public static int lives;
         public static int SlimeNum;
         int count;
+        int powerupchance;
+        int poweruptype;
         int level;
 
         // Paddle and Ball objects
@@ -81,24 +84,24 @@ namespace BrickBreaker
 
             //TODO - replace all the code in this region eventually with code that loads levels from xml files
 
-           // if (blocks == null)
+            // if (blocks == null)
             //{
-                //ExtractLevel(1);
-               
-               // level++;
-           // }
+            //ExtractLevel(1);
+
+            // level++;
+            // }
 
 
 
-            //blocks.Clear();
-            //int x = 10;
+            blocks.Clear();
+            int x = 10;
 
-            //while (blocks.Count < 12)
-            //{
-            //    x += 57;
-            //    Block b1 = new Block(x, 10, 1, Color.White);
-            //    blocks.Add(b1);
-            //}
+            while (blocks.Count < 12)
+            {
+                x += 57;
+                Block b1 = new Block(x, 10, 1, "White");
+                blocks.Add(b1);
+            }
 
             #endregion
 
@@ -189,6 +192,13 @@ namespace BrickBreaker
                     {
                         gameTimer.Enabled = false;
                         OnEnd();
+                    }
+
+                    powerupchance = Randgen.Next(0, 101);
+
+                    if (powerupchance <= 20)
+                    {
+
                     }
 
                     break;
