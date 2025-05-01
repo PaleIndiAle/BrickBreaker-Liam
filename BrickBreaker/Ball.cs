@@ -6,7 +6,7 @@ namespace BrickBreaker
 {
     public class Ball
     {
-        public int x, y, xSpeed, ySpeed, size;
+        public int x, y, xSpeed, ySpeed, size, lastX;
         public Color colour;
 
         public static Random rand = new Random();
@@ -35,6 +35,12 @@ namespace BrickBreaker
             if (ballRec.IntersectsWith(blockRec))
             {
                 ySpeed *= -1;
+
+                if (y < b.y + b.height) //if ballY (top of ball) is more than blockY + blockHeight (bottom of block)
+                {
+                    xSpeed *= -1; //switch x direction (left and right)
+                    //x = b.x + b.width; // move ball to right side
+                }
             }
 
             return blockRec.IntersectsWith(ballRec);
@@ -45,10 +51,65 @@ namespace BrickBreaker
             Rectangle ballRec = new Rectangle(x, y, size, size);
             Rectangle paddleRec = new Rectangle(p.x, p.y, p.width, p.height);
 
+
             if (ballRec.IntersectsWith(paddleRec))
             {
                 ySpeed *= -1;
+
+                int pSectionWidth = p.width / 3;
+                int ballCentre = x + (size / 2);
+
+                if (ballCentre < p.x + pSectionWidth) //hit left side
+                {
+                    xSpeed = 5;
+
+                    if (x < lastX) //if ball moving left
+                    {
+                        xSpeed = -xSpeed;
+                    }
+                    else
+                    {
+                        xSpeed = +xSpeed;
+                    }
+
+
+                }
+                else if (ballCentre > p.x + pSectionWidth * 2) //hit right side
+                {
+                    xSpeed = 5;
+
+                    if (x > lastX) //if ball moving right
+                    {
+                        xSpeed = +xSpeed;
+                    }
+                    else
+                    {
+                        xSpeed = -xSpeed;
+                    }
+
+                }
+                else //middle
+                {
+                    xSpeed = 2;
+                }
+
+                if (y + size > p.y) //if ballY + ballsize is more than paddleY (bottom of ball is more than top of paddle) //hitting paddle sides
+                {
+                    if (x < p.x) //hit left side
+                    {
+                        x = p.x - size; //move ball to the left side
+
+                        xSpeed *= -1;
+                    }
+                    else if (x + size > p.x + p.width + 1) //hit right side
+                    {
+                        x = p.x + p.width; // move ball to right side
+                    }
+                }
             }
+
+            lastX = x;
+            y -= 1;
         }
 
         public void WallCollision(UserControl UC)
@@ -67,6 +128,7 @@ namespace BrickBreaker
             if (y <= 2)
             {
                 ySpeed *= -1;
+                y = 1;
             }
         }
 
