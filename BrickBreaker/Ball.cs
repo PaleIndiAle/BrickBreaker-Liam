@@ -56,37 +56,19 @@ namespace BrickBreaker
             {
                 ySpeed *= -1;
 
+
                 int pSectionWidth = p.width / 3;
                 int ballCentre = x + (size / 2);
 
                 if (ballCentre < p.x + pSectionWidth) //hit left side
                 {
                     xSpeed = 5;
-
-                    if (x > lastX) //if ball moving left
-                    {
-                        xSpeed = -xSpeed;
-                    }
-                    else
-                    {
-                        xSpeed = +xSpeed;
-                    }
-
-
+                    xSpeed *= -1;
                 }
                 else if (ballCentre > p.x + pSectionWidth * 2) //hit right side
                 {
                     xSpeed = 5;
-
-                    if (x < lastX) //if ball moving right
-                    {
-                        xSpeed = +xSpeed;
-                    }
-                    else
-                    {
-                        xSpeed = -xSpeed;
-                    }
-
+                    xSpeed *= -1;
                 }
                 else //middle
                 {
