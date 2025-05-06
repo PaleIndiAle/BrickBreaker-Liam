@@ -145,5 +145,25 @@ namespace BrickBreaker
             return didCollide;
         }
 
+
+        public bool PushedOutOfBounds(Paddle p, UserControl UC)
+        {
+            Rectangle ballRec = new Rectangle(x, y, size, size);
+            Rectangle paddleRec = new Rectangle(p.x, p.y, p.width, p.height);
+
+            Boolean pushedOut = false;
+
+            if (x >= UC.Width + 2 || x < 0 - size)
+            {
+                pushedOut = true;
+
+                ySpeed = +ySpeed;
+                x = p.x + p.width / 2;
+                y = p.y - size;
+            }
+
+            return pushedOut;
+        }
+
     }
 }

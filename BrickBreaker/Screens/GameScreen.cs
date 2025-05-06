@@ -195,6 +195,12 @@ namespace BrickBreaker
                 }
             }
 
+            //Check if ball is pushed out of bounds, reset ball
+            if (ball.PushedOutOfBounds(paddle, this))
+            {
+
+            }
+
             //redraw the screen
             Refresh();
         }
