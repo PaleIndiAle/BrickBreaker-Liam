@@ -55,7 +55,7 @@ namespace BrickBreaker
             if (ballRec.IntersectsWith(paddleRec))
             {
                 ySpeed *= -1;
-
+                
 
                 int pSectionWidth = p.width / 3;
                 int ballCentre = x + (size / 2);
@@ -135,7 +135,7 @@ namespace BrickBreaker
 
             Boolean pushedOut = false;
 
-            if (x >= UC.Width + 2 || x < 0 - size)
+            if (x >= UC.Width || x < 0 - size)
             {
                 pushedOut = true;
 
