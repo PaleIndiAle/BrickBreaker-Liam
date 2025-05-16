@@ -7,6 +7,7 @@ namespace BrickBreaker
     public class Ball
     {
         public int x, y, xSpeed, ySpeed, size, lastX;
+        public static int powerup;
         public Color colour;
 
         public static Random rand = new Random();
@@ -46,11 +47,26 @@ namespace BrickBreaker
             return blockRec.IntersectsWith(ballRec);
         }
 
-        public void PaddleCollision(Paddle p)
+        public void LuckCollision(Paddle p)
         {
             Rectangle ballRec = new Rectangle(x, y, size, size);
             Rectangle paddleRec = new Rectangle(p.x, p.y, p.width, p.height);
 
+            if (ballRec.IntersectsWith(paddleRec))
+            {
+                int powerupselect = rand.Next(0, 11);
+
+                if (powerupselect == 1)
+                {
+                    powerup = 1;
+                }
+            }
+        }
+
+        public void PaddleCollision(Paddle p)
+        {
+            Rectangle ballRec = new Rectangle(x, y, size, size);
+            Rectangle paddleRec = new Rectangle(p.x, p.y, p.width, p.height);
 
             if (ballRec.IntersectsWith(paddleRec))
             {

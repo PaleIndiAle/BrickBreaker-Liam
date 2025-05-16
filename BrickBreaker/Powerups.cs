@@ -8,26 +8,24 @@ namespace BrickBreaker
 {
     internal class Powerups
     {
-        Paddle paddle;
-
         public Powerups()
         {
             
         }
         // Makes the player move two pixels faster
-        public void Speed_I()
+        public static void Speed_I(Paddle p)
         {
-            paddle.speed = 8 + 2;
+            p.speed = 8 + 2;
         }
         // Makes the player move four pixels faster
-        public void Speed_II()
+        public void Speed_II(Paddle p)
         {
-            paddle.speed = 8 + 4;
+            p.speed = 8 + 4;
         }
         // Makes the player move six pixels faster
-        public void Speed_III()
+        public void Speed_III(Paddle p)
         {
-            paddle.speed = 8 + 6;
+            p.speed = 8 + 6;
         }
         // Adds a life to the player
         public void Golden_Carrot()

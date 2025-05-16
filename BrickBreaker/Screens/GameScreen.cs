@@ -33,11 +33,12 @@ namespace BrickBreaker
         int level;
 
         // Paddle and Ball objects
-        Paddle paddle;
+        public static Paddle paddle;
         Ball ball;
 
         // list of all blocks for current level
         public List<Block> blocks = new List<Block>();
+        public List<Ball> powerupballs = new List<Ball>();
 
         // Brushes
         SolidBrush whiteBrush = new SolidBrush(Color.White);
@@ -195,12 +196,28 @@ namespace BrickBreaker
 
                     powerupchance = Randgen.Next(0, 101);
 
-                    if (powerupchance <= 20)
+                    if (powerupchance <= 100)
                     {
-
+                        Ball pub = new Ball(b.x+20, b.y, 0, 1, 20);
+                        powerupballs.Add(pub);
                     }
 
                     break;
+                }
+            }
+
+            foreach (Ball pub in powerupballs)
+            {
+                pub.y++;
+
+                pub.LuckCollision(paddle);
+            }
+
+            foreach (Ball pub in powerupballs)
+            {
+                if (Ball.powerup == 1)
+                {
+                    Powerups.Speed_I(paddle);
                 }
             }
 
@@ -266,6 +283,11 @@ namespace BrickBreaker
             foreach (Block b in blocks)
             {
                 e.Graphics.FillRectangle(redBrush, b.x, b.y, b.width, b.height);
+            }
+
+            foreach (Ball pub in powerupballs)
+            {
+                e.Graphics.FillRectangle(redBrush, pub.x, pub.y, pub.size, pub.size);
             }
 
             // Draws ball
