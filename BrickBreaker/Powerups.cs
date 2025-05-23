@@ -30,7 +30,7 @@ namespace BrickBreaker
             p.speed = 8 + 6;
         }
         // Adds a life to the player
-        public void Golden_Carrot()
+        public static void Golden_Carrot()
         {
             if (GameScreen.lives > 3)
             {
@@ -38,7 +38,7 @@ namespace BrickBreaker
             }
         }
         // Adds three life to the player
-        public void Golden_Apple()
+        public static void Golden_Apple()
         {
             if (GameScreen.lives >= 3)
             {

@@ -213,7 +213,7 @@ namespace BrickBreaker
 
                 if (pub.LuckCollision(paddle))
                 {
-                    int powerupselect = Randgen.Next(0, 4);
+                    int powerupselect = Randgen.Next(0, 6);
 
                     if (powerupselect == 1)
                     {
@@ -226,6 +226,14 @@ namespace BrickBreaker
                     else if (powerupselect == 3)
                     {
                         Powerups.Speed_III(paddle);
+                    }
+                    else if (powerupselect == 4)
+                    {
+                        Powerups.Golden_Carrot(paddle);
+                    }
+                    else if (powerupselect == 5)
+                    {
+                        Powerups.Golden_Apple(paddle);
                     }
 
                     powerupballs.Remove(pub);
