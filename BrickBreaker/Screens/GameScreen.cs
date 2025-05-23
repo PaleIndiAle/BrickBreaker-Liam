@@ -5,14 +5,15 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Drawing;
 using System.Data;
+using System.Drawing;
 using System.Linq;
+using System.Media;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Media;
 using System.Xml;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.Rebar;
 
 namespace BrickBreaker
 {
@@ -38,7 +39,7 @@ namespace BrickBreaker
 
         // list of all blocks for current level
         public List<Block> blocks = new List<Block>();
-        public List<Ball> powerupballs = new List<Ball>();
+        public static List<Ball> powerupballs = new List<Ball>();
 
         // Brushes
         SolidBrush whiteBrush = new SolidBrush(Color.White);
@@ -196,9 +197,9 @@ namespace BrickBreaker
 
                     powerupchance = Randgen.Next(0, 101);
 
-                    if (powerupchance <= 100)
+                    if (powerupchance <= 75)
                     {
-                        Ball pub = new Ball(b.x+20, b.y, 0, 1, 20);
+                        Ball pub = new Ball(b.x+20, b.y, 0, 200, 20);
                         powerupballs.Add(pub);
                     }
 
@@ -210,14 +211,25 @@ namespace BrickBreaker
             {
                 pub.y++;
 
-                pub.LuckCollision(paddle);
-            }
-
-            foreach (Ball pub in powerupballs)
-            {
-                if (Ball.powerup == 1)
+                if (pub.LuckCollision(paddle))
                 {
-                    Powerups.Speed_I(paddle);
+                    int powerupselect = Randgen.Next(0, 4);
+
+                    if (powerupselect == 1)
+                    {
+                        Powerups.Speed_I(paddle);
+                    }
+                    else if (powerupselect == 2)
+                    {
+                        Powerups.Speed_II(paddle);
+                    }
+                    else if (powerupselect == 3)
+                    {
+                        Powerups.Speed_III(paddle);
+                    }
+
+                    powerupballs.Remove(pub);
+                    break;
                 }
             }
 
