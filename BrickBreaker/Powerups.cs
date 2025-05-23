@@ -8,7 +8,11 @@ namespace BrickBreaker
 {
     internal class Powerups
     {
-        public static int poweractivate;
+        public static int poweractivate, damage;
+        // btfootb = beat the fuck out of those blocks
+        public static bool btfootb;
+        // list of extra balls
+        public static List<Ball> extraballs = new List<Ball>();
 
         public Powerups()
         {
@@ -46,13 +50,34 @@ namespace BrickBreaker
             }
         }
         // Adds one more ball to the field
-        public void Slime()
+        public static void Slime()
         {
-            GameScreen.SlimeNum = 1;
+            foreach (Ball ball in extraballs)
+            {
+                Ball eb = new Ball(ballX, ballY, xSpeed, ySpeed, ballSize);
+                extraballs.Add(eb);
+            }
         }
         // Upgrades to stone tool, does 1 extra damage
+        public static void stonetool()
+        {
+            damage = 2;
+        }
         // Upgrades to iron tool, does 2 extra damage
+        public static void irontool()
+        {
+            damage = 3;
+        }
         // Upgrades to diamond tool, does 3 extra damage
+        public static void diamondtool()
+        {
+            damage = 4;
+        }
         // Upgrades to netherite tool, does 4 extra damage, can break unbreakable blocks
+        public static void netheritetool()
+        {
+            damage = 5;
+            btfootb = true;
+        }
     }
 }

@@ -39,6 +39,8 @@ namespace BrickBreaker
 
         // list of all blocks for current level
         public List<Block> blocks = new List<Block>();
+
+        // list of powerup balls that has a chance to spawn when a block is hit
         public static List<Ball> powerupballs = new List<Ball>();
 
         // Brushes
@@ -207,13 +209,14 @@ namespace BrickBreaker
                 }
             }
 
+            // makes the powerup ball fall and checks if the powerup ball has been hit yet, if it has then it chooses a random powerup
             foreach (Ball pub in powerupballs)
             {
                 pub.y++;
 
                 if (pub.LuckCollision(paddle))
                 {
-                    int powerupselect = Randgen.Next(0, 6);
+                    int powerupselect = Randgen.Next(1, 11);
 
                     if (powerupselect == 1)
                     {
@@ -229,11 +232,31 @@ namespace BrickBreaker
                     }
                     else if (powerupselect == 4)
                     {
-                        Powerups.Golden_Carrot(paddle);
+                        Powerups.Golden_Carrot();
                     }
                     else if (powerupselect == 5)
                     {
-                        Powerups.Golden_Apple(paddle);
+                        Powerups.Golden_Apple();
+                    }
+                    else if (powerupselect == 6)
+                    {
+                        Powerups.Slime();
+                    }
+                    else if (powerupselect == 7)
+                    {
+                        Powerups.stonetool();
+                    }
+                    else if (powerupselect == 8)
+                    {
+                        Powerups.irontool();
+                    }
+                    else if (powerupselect == 9)
+                    {
+                        Powerups.diamondtool();
+                    }
+                    else if (powerupselect == 10)
+                    {
+                        Powerups.netheritetool();
                     }
 
                     powerupballs.Remove(pub);
@@ -305,9 +328,16 @@ namespace BrickBreaker
                 e.Graphics.FillRectangle(redBrush, b.x, b.y, b.width, b.height);
             }
 
+            // Draws power up balls
             foreach (Ball pub in powerupballs)
             {
                 e.Graphics.FillRectangle(redBrush, pub.x, pub.y, pub.size, pub.size);
+            }
+
+            // Draws extra balls from power up
+            foreach (Ball eb in Powerups.extraballs)
+            {
+                e.Graphics.FillRectangle(whiteBrush, eb.x, eb.y, eb.size, eb.size);
             }
 
             // Draws ball
