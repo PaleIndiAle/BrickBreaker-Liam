@@ -9,6 +9,8 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Media;
+using System.Runtime.CompilerServices;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -26,8 +28,7 @@ namespace BrickBreaker
 
         // Game values
         Random Randgen = new Random();
-        public static int lives;
-        public static int SlimeNum;
+        public static int lives, slimex, slimey;
         int count;
         int powerupchance;
         int poweruptype;
@@ -216,7 +217,8 @@ namespace BrickBreaker
 
                 if (pub.LuckCollision(paddle))
                 {
-                    int powerupselect = Randgen.Next(1, 11);
+                    // int powerupselect = Randgen.Next(1, 11);
+                    int powerupselect = 6;
 
                     if (powerupselect == 1)
                     {
@@ -240,6 +242,9 @@ namespace BrickBreaker
                     }
                     else if (powerupselect == 6)
                     {
+                        slimex = pub.x;
+                        slimey = pub.y;
+
                         Powerups.Slime();
                     }
                     else if (powerupselect == 7)
@@ -260,6 +265,19 @@ namespace BrickBreaker
                     }
 
                     powerupballs.Remove(pub);
+                    break;
+                }
+            }
+
+            foreach (Ball eb in Powerups.extraballs)
+            {
+                eb.Move();
+
+                eb.WallCollision(this);
+
+                if (eb.BottomCollision(this))
+                {
+                    Powerups.extraballs.Remove(eb);
                     break;
                 }
             }

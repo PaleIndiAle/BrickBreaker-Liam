@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -52,11 +53,8 @@ namespace BrickBreaker
         // Adds one more ball to the field
         public static void Slime()
         {
-            foreach (Ball ball in extraballs)
-            {
-                Ball eb = new Ball(ballX, ballY, xSpeed, ySpeed, ballSize);
-                extraballs.Add(eb);
-            }
+            Ball eb = new Ball(GameScreen.slimex, GameScreen.slimex, -6, -6, 20);
+            extraballs.Add(eb);
         }
         // Upgrades to stone tool, does 1 extra damage
         public static void stonetool()
